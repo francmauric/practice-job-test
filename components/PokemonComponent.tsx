@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { TextInput, Button, Card, Image, Text, Loader } from '@mantine/core';
 import axios from 'axios';
+import Buscador from './Buscador'
 
 interface Pokemon {
     name: string;
@@ -39,25 +41,36 @@ function PokemonComponent() {
 
         <div style={{ maxWidth: 400, margin: '0 auto'}}>
             <h1>pokemon api</h1>
-            <input 
+            {/* <TextInput 
+                variant="filled"
+                size="md"
+                radius="lg"
+                label="Input label"
+                withAsterisk
                 placeholder='Encuentra tu POKEMON'
                 value={search}
                 onChange={(event) => setSearch(event.currentTarget.value)}
-            />
-            <button onClick={handleSearch} style={{ marginTop: '10px'}}>
+            /> */}
+            <Buscador value = {search} onValueChange={setSearch}/>
+            <Button onClick={handleSearch} style={{ marginTop: '10px'}}>
                 Search
-            </button>
+            </Button>
             
-            {loading && <p>Loading...</p>}
+            {loading && <Loader style={{ marginTop: '20px' }} />}
 
-            {error && <p>{error}</p>}
+            {error && <Text  style={{ marginTop: '20px', color:'red' }}>{error}</Text>}
 
             {pokemon && (
-                <div>
-                    <h1>{pokemon.name}</h1>
-                    <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-                    <p>type: {pokemon.types.map((t) => t.type.name).join(', ')}</p>
-                </div>
+                <Card shadow="sm" padding="lg" style={{ marginTop: '20px' }}>
+                    <Card.Section>
+                        <Image src={pokemon.sprites.front_default} alt={pokemon.name}/>
+                    </Card.Section>
+                    <Text>Name: {pokemon.name}</Text>
+                    <Text>
+                        Type: {pokemon.types.map((t) => t.type.name).join(', ')}
+                    </Text>
+                    
+                </Card>
             )}
         </div>
     )
