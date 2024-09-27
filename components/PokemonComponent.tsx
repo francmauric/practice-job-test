@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TextInput, Button, Card, Image, Text, Loader } from '@mantine/core';
 import axios from 'axios';
 import Buscador from './Buscador'
@@ -19,7 +19,8 @@ function PokemonComponent() {
 
     console.log(search)
 
-    const handleSearch = async () => {
+    const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         setLoading(true);
         setError('');
         
@@ -40,21 +41,15 @@ function PokemonComponent() {
     return (
 
         <div style={{ maxWidth: 400, margin: '0 auto'}}>
-            <h1>pokemon api</h1>
-            {/* <TextInput 
-                variant="filled"
-                size="md"
-                radius="lg"
-                label="Input label"
-                withAsterisk
-                placeholder='Encuentra tu POKEMON'
-                value={search}
-                onChange={(event) => setSearch(event.currentTarget.value)}
-            /> */}
             <Buscador value = {search} onValueChange={setSearch}/>
-            <Button onClick={handleSearch} style={{ marginTop: '10px'}}>
-                Search
-            </Button>
+            <h1>pokemon api</h1>
+            <form onSubmit={handleSearch}>
+                <Buscador value = {search} onValueChange={setSearch}/>
+                <Button type='submit' style={{ marginTop: '10px'}}>
+                    Search
+                </Button>
+
+            </form>
             
             {loading && <Loader style={{ marginTop: '20px' }} />}
 
