@@ -42,10 +42,16 @@ function PokemonComponent() {
 
         <div style={{ maxWidth: 400, margin: '0 auto'}}>
             <Buscador value = {search} onValueChange={setSearch}/>
-            <h1>pokemon api</h1>
+            <h1>Pokemon API</h1>
             <form onSubmit={handleSearch}>
                 <Buscador value = {search} onValueChange={setSearch}/>
-                <Button type='submit' style={{ marginTop: '10px'}}>
+                <Button 
+                    variant="gradient"
+                    gradient={{ from: 'teal', to: 'gray', deg: 360 }}
+                    type='submit' 
+                    radius="lg"
+                    size='lg'
+                    style={{ marginTop: '10px'}}>
                     Search
                 </Button>
 
