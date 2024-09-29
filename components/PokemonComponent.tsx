@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {  Button, Card, Image, Text, Loader } from '@mantine/core';
-import axios from 'axios';
+import { getPokemonDetails } from '../src/services/pokemonService';
 import Buscador from './Buscador/Buscador'
 
 interface Pokemon {
@@ -25,7 +25,7 @@ function PokemonComponent() {
         setError('');
         
         try {
-            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`)
+            const response = await getPokemonDetails(search);
             setPokemon(response.data);
             console.log(response.data)
         } catch (error) {

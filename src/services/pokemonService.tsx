@@ -40,5 +40,15 @@ export async function searchPokemonByName ():Promise<string[]> {
     }
 };
 
+//pokemon por detalles
 
+export async function getPokemonDetails  (name: string)  {
+    try{
+        const response = await axios.get(`${PokeApi}/${name.toLowerCase()}`);
+        return response;
+    } catch (error) {
+        console.error ('Error llamando detalles de Pokemon:', error);
+        throw error;
+    }
+};
 
