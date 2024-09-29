@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Autocomplete } from '@mantine/core';
-import classes from './Demo.module.css';
-import axios from 'axios';
+import classes from './Search.module.css';
+import { searchPokemonByName } from '../../src/services/pokemonService';
 
 interface BuscadorProps {
     value: string;
@@ -14,22 +14,21 @@ function Buscador({ value, onValueChange }: BuscadorProps) {
   const [focused, setFocused] = useState(false);
   const floating = focused || value.length > 0 || undefined;
 
-  const getPokemonNames = async () => {
+ useEffect(() => {
+  const fetchNames = async () => {
     try {
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000');
-      const pokemonNames = response.data.results.map((pokemon: { name: string }) => pokemon.name );
-      setSuggestions(pokemonNames);
-      console.log(pokemonNames)
+      const names = await searchPokemonByName();
+      setSuggestions(names)
     } catch (error) {
-      console.error('Error en la llamada', error);
+      console.error('Error fetching Pokemon names:', error);
     }
   };
+  fetchNames();
+ }, []);
 
 
 
-  useEffect(() => {
-    getPokemonNames();
-  }, []);
+ 
 
 
   return (

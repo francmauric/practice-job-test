@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { TextInput, Button, Card, Image, Text, Loader } from '@mantine/core';
+import {  Button, Card, Image, Text, Loader } from '@mantine/core';
 import axios from 'axios';
-import Buscador from './Buscador'
+import Buscador from './Buscador/Buscador'
 
 interface Pokemon {
     name: string;

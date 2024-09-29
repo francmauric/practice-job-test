@@ -3,8 +3,7 @@ import PokemonComponent from '../components/PokemonComponent';
 import '@mantine/core/styles.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import SliderPoke from '../components/SliderPoke'
-
+import SliderPoke from '../components/SliderPoke/SliderPoke'
 
 const App: React.FC = () => {
 

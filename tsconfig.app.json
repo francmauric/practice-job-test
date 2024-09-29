@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "components/SliderPoke.tsx"]
+  "include": ["src", "components/SliderPoke/SliderPoke.tsx"]
 }
