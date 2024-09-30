@@ -1,21 +1,43 @@
 import React, { useState } from 'react';
-import {  Button, Card, Image, Text, Loader } from '@mantine/core';
+import {  Button, Card, Image, Text, Loader, Group, Collapse } from '@mantine/core';
 import { getPokemonDetails } from '../src/services/pokemonService';
 import Buscador from './Buscador/Buscador'
+import { useDisclosure } from '@mantine/hooks';
 
 interface Pokemon {
     name: string;
     sprites: { front_default: string };
     types: { type: { name: string } }[];
+    abilities: Ability[];
+    stats: Stat[];
+    moves: Move[];
 }
 
+interface Ability {
+    ability: {
+        name: string;
+    };
+}
 
+interface Stat {
+    stat: {
+        name: string;
+    };
+    base_stat: number;
+}
+
+interface Move {
+    move: {
+        name: string;
+    }
+}
 
 function PokemonComponent() {
     const [search, setSearch] = useState('');
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [opened, { toggle }] = useDisclosure(false);
 
     console.log(search)
 
@@ -41,7 +63,6 @@ function PokemonComponent() {
     return (
 
         <div style={{ maxWidth: 400, margin: '0 auto'}}>
-            <Buscador value = {search} onValueChange={setSearch}/>
             <h1>Pokemon API</h1>
             <form onSubmit={handleSearch}>
                 <Buscador value = {search} onValueChange={setSearch}/>
@@ -66,11 +87,29 @@ function PokemonComponent() {
                     <Card.Section>
                         <Image src={pokemon.sprites.front_default} alt={pokemon.name}/>
                     </Card.Section>
+
                     <Text>Name: {pokemon.name}</Text>
-                    <Text>
-                        Type: {pokemon.types.map((t) => t.type.name).join(', ')}
-                    </Text>
-                    
+                    <Group justify='center' mb={5}>
+                        <Button onClick={toggle}>Details</Button>
+                    </Group>
+                    <Collapse in={opened} transitionDuration={1000} transitionTimingFunction='linear'>
+                    <Text>Type: {pokemon.types.map((t) => t.type.name).join(', ')}</Text>
+                    <Text>Abilities: {pokemon.abilities.map(a => a.ability.name).join(',')}</Text>
+                    <Text>Base Stats: </Text>
+                    <ul>
+                        {pokemon.stats.map(stat => (
+                            <li key={stat.stat.name}>
+                                {stat.stat.name}: {stat.base_stat}
+                            </li>
+                        ))}
+                    </ul>
+                    <Text>Moves: </Text>
+                    <ul>
+                        {pokemon.moves.slice(0,10).map((move,index) => (
+                            <li key={index}>{move.move.name}</li>
+                        ))}
+                    </ul>
+                    </Collapse>
                 </Card>
             )}
         </div>
