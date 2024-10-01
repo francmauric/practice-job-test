@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {  Button, Card, Image, Text, Loader, Group, Collapse } from '@mantine/core';
-import { getPokemonDetails } from '../src/services/pokemonService';
+import { Button, Card, Image, Text, Loader, Group, Collapse } from '@mantine/core';
+import { getPokemonDetailsforCard } from '../src/services/pokemonService';
 import Buscador from './Buscador/Buscador'
 import { useDisclosure } from '@mantine/hooks';
 
@@ -45,15 +45,16 @@ function PokemonComponent() {
         event.preventDefault();
         setLoading(true);
         setError('');
-        
+
         try {
-            const response = await getPokemonDetails(search);
+            const response = await getPokemonDetailsforCard(search);
             setPokemon(response.data);
+            setSearch('')
             console.log(response.data)
         } catch (error) {
             setError('Pokemon not found');
             setPokemon(null);
-        } 
+        }
 
         setLoading(false)
     };
@@ -62,53 +63,60 @@ function PokemonComponent() {
 
     return (
 
-        <div style={{ maxWidth: 400, margin: '0 auto'}}>
+        <div style={{ maxWidth: 400, margin: '0 auto' }}>
             <h1>Pokemon API</h1>
             <form onSubmit={handleSearch}>
-                <Buscador value = {search} onValueChange={setSearch}/>
-                <Button 
+                <Buscador value={search} onValueChange={setSearch} />
+                <Button
                     variant="gradient"
                     gradient={{ from: 'teal', to: 'gray', deg: 360 }}
-                    type='submit' 
+                    type='submit'
                     radius="lg"
                     size='lg'
-                    style={{ marginTop: '10px'}}>
+                    style={{ marginTop: '10px' }}>
                     Search
                 </Button>
 
             </form>
-            
+
             {loading && <Loader style={{ marginTop: '20px' }} />}
 
-            {error && <Text  style={{ marginTop: '20px', color:'red' }}>{error}</Text>}
+            {error && <Text style={{ marginTop: '20px', color: 'red' }}>{error}</Text>}
 
             {pokemon && (
                 <Card shadow="sm" padding="lg" style={{ marginTop: '20px' }}>
                     <Card.Section>
-                        <Image src={pokemon.sprites.front_default} alt={pokemon.name}/>
+                        <Image src={pokemon.sprites.front_default} alt={pokemon.name} />
                     </Card.Section>
 
-                    <Text>Name: {pokemon.name}</Text>
+                    <Text
+                        variant="gradient"
+                        gradient={{ from: 'teal', to: 'gray', deg: 360 }}
+                        size="xl"
+                        fw={700}
+                    >
+                        Name: {pokemon.name}</Text>
                     <Group justify='center' mb={5}>
-                        <Button onClick={toggle}>Details</Button>
+                        <Button variant="gradient"
+                            gradient={{ from: 'gray', to: 'green', deg: 178 }} onClick={toggle}>Details</Button>
                     </Group>
                     <Collapse in={opened} transitionDuration={1000} transitionTimingFunction='linear'>
-                    <Text>Type: {pokemon.types.map((t) => t.type.name).join(', ')}</Text>
-                    <Text>Abilities: {pokemon.abilities.map(a => a.ability.name).join(',')}</Text>
-                    <Text>Base Stats: </Text>
-                    <ul>
-                        {pokemon.stats.map(stat => (
-                            <li key={stat.stat.name}>
-                                {stat.stat.name}: {stat.base_stat}
-                            </li>
-                        ))}
-                    </ul>
-                    <Text>Moves: </Text>
-                    <ul>
-                        {pokemon.moves.slice(0,10).map((move,index) => (
-                            <li key={index}>{move.move.name}</li>
-                        ))}
-                    </ul>
+                        <Text>Type: {pokemon.types.map((t) => t.type.name).join(', ')}</Text>
+                        <Text>Abilities: {pokemon.abilities.map(a => a.ability.name).join(',')}</Text>
+                        <Text>Base Stats: </Text>
+                        <ul>
+                            {pokemon.stats.map(stat => (
+                                <li key={stat.stat.name}>
+                                    {stat.stat.name}: {stat.base_stat}
+                                </li>
+                            ))}
+                        </ul>
+                        <Text>Moves: </Text>
+                        <ul>
+                            {pokemon.moves.slice(0, 10).map((move, index) => (
+                                <li key={index}>{move.move.name}</li>
+                            ))}
+                        </ul>
                     </Collapse>
                 </Card>
             )}

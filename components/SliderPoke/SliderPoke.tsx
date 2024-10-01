@@ -3,7 +3,8 @@ import { Card, Image, Text, Loader } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import './PokeSlider.css'
 import { getPokemons } from '../../src/services/pokemonService';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Pokemon {
     name: string;
@@ -37,11 +38,11 @@ function SliderPoke () {
         dots: false,
         infinite: true,
         speed: 3000,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 0,
         cssEase: 'linear',
+        pauseOnHover: true,
         rtl: true,
         
     };

@@ -1,8 +1,8 @@
 import { MantineProvider } from '@mantine/core';
 import PokemonComponent from '../components/PokemonComponent';
 import '@mantine/core/styles.css';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import PokemonFilter from '../components/FiltroPoke/PokemonFilter'
+
 import SliderPoke from '../components/SliderPoke/SliderPoke'
 
 const App: React.FC = () => {
@@ -12,7 +12,8 @@ const App: React.FC = () => {
 
       <h1>proyecto pokemon</h1>
       <PokemonComponent />
-      <SliderPoke />
+      {/* <SliderPoke /> */}
+      <PokemonFilter />
     </MantineProvider>
   )
 }
