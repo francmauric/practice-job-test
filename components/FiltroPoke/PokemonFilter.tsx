@@ -19,7 +19,7 @@ function PokemonFilter () {
 
     const [loading, setLoading] = useState(false);
 
-    console.log(pokemons.results)
+    /* console.log(pokemons) */
 
     useEffect(() => {
         async function fetchData() {
@@ -83,7 +83,7 @@ function PokemonFilter () {
                         label="Estadistica minima"
                         placeholder="valor minimo"
                         value={minStat}
-                        onChange={(value) => setMinStat(value || 0)}
+                        onChange={(value) => setMinStat(typeof value === 'number' ? value : 0)}
                     />
                 </Grid.Col>
             </Grid>
@@ -97,7 +97,7 @@ function PokemonFilter () {
                 {pokemons.map((pokemon) => (
                     <div key={pokemon.name}>
                         
-                        <Button><a href={pokemon.url}>{pokemon.name}</a></Button>
+                        <p>{pokemon.name}</p>
                     </div>
                 ))}
             </div>
