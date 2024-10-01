@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Select, NumberInput, Button, Grid } from '@mantine/core';
 import { getPokemonTypes, filterPokemons, getPokemonDetails, getPokemonAbility } from '../../src/services/pokemonService';
-import "./Filter.css"
+import classes from './Filter.module.css';
 interface Pokemon {
     name: string;
     url: string;
@@ -57,7 +57,7 @@ function PokemonFilter () {
     }
 
     return(
-        <div className="container-padre">
+        <div className={classes.container}>
             <Grid>
                 <Grid.Col span={4} >
                     <Select 

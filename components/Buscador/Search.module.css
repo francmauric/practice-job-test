@@ -1,6 +1,7 @@
 .root {
     position: relative;
     margin-top: 5px;
+    text-align: start;
   }
   
   .input {
@@ -17,6 +18,7 @@
     position: absolute;
     z-index: 1;
     pointer-events: none;
+    padding-left: 10px;
     top: 4px;
     color: var(--mantine-color-placeholder);
     font-weight: 400;

@@ -100,7 +100,7 @@ function PokemonComponent() {
                         <Button variant="gradient"
                             gradient={{ from: 'gray', to: 'green', deg: 178 }} onClick={toggle}>Details</Button>
                     </Group>
-                    <Collapse in={opened} transitionDuration={1000} transitionTimingFunction='linear'>
+                    <Collapse style={{textAlign:"start"}} in={opened} transitionDuration={1000} transitionTimingFunction='linear'>
                         <Text>Type: {pokemon.types.map((t) => t.type.name).join(', ')}</Text>
                         <Text>Abilities: {pokemon.abilities.map(a => a.ability.name).join(',')}</Text>
                         <Text>Base Stats: </Text>
