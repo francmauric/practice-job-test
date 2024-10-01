@@ -1,9 +1,11 @@
 .slider-card {
+    overflow: hidden;
     padding: 20px;
     transition: transform 0.3s ease-in-out;
 }
 
 .pokemon-card {
+    overflow: hidden;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     cursor: pointer;
 }  

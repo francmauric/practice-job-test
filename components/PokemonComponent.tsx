@@ -50,7 +50,7 @@ function PokemonComponent() {
             const response = await getPokemonDetailsforCard(search);
             setPokemon(response.data);
             setSearch('')
-            console.log(response.data)
+            console.log(response)
         } catch (error) {
             setError('Pokemon not found');
             setPokemon(null);

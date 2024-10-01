@@ -45,6 +45,7 @@ function SliderPoke () {
         pauseOnHover: true,
         rtl: true,
         
+        
     };
 
    
