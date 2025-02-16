@@ -51,7 +51,7 @@ function SliderPoke () {
    
  
     return(
-       /*  <Slider {...settings}>
+        <Slider {...settings}>
             {pokemons.map((pokemon) => (
                 <div key={pokemon.name} className='slider-card'>
                 <Card  shadow='lg' radius="md" padding='lg' className='pokemon-card'>
@@ -65,7 +65,7 @@ function SliderPoke () {
             {loading && <Loader style={{ marginTop: '20px' }} />}
 
             {error && <Text  style={{ marginTop: '20px', color:'red' }}>{error}</Text>}
-        </Slider > */
+        </Slider >
     )
 }
 
